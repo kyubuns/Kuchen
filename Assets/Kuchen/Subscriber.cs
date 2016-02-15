@@ -80,6 +80,48 @@ namespace Kuchen
 			for(var i=subscribeEvents.Count-1;i>=0;--i) if(se == subscribeEvents[i]) subscribeEvents.RemoveAt(i);
 		}
 		
+		public void Pause(bool active = false)
+		{
+			if(bookedEvents != null)
+			{
+				bookedEvents.Add(() => Pause(active));
+				return;
+			}
+			
+			for(var i=subscribeEvents.Count-1;i>=0;--i)
+			{
+				subscribeEvents[i].Pausing = !active;
+			}
+		}
+		public void Resume(){ Pause(true); }
+		
+		public void Pause(string topic, bool active = false)
+		{
+			if(bookedEvents != null)
+			{
+				bookedEvents.Add(() => Pause(topic, active));
+				return;
+			}
+			
+			for(var i=subscribeEvents.Count-1;i>=0;--i)
+			{
+				if(Array.IndexOf(subscribeEvents[i].Topics, topic) >= 0) subscribeEvents[i].Pausing = !active;
+			}
+		}
+		public void Resume(string topic){ Pause(topic, true); }
+		
+		public void Pause(ISubscribeEvent se, bool active = false)
+		{
+			if(bookedEvents != null)
+			{
+				bookedEvents.Add(() => Pause(se, active));
+				return;
+			}
+			
+			for(var i=subscribeEvents.Count-1;i>=0;--i) if(se == subscribeEvents[i]) subscribeEvents[i].Pausing = !active;
+		}
+		public void Resume(ISubscribeEvent se){ Pause(se, true); }
+		
 		public int Call(string topic) { return Call(topic, new object[]{}); }
 		public int Call<T1>(string topic, T1 arg1) { return Call(topic, new object[]{arg1}); }
 		public int Call<T1, T2>(string topic, T1 arg1, T2 arg2) { return Call(topic, new object[]{arg1, arg2}); }
@@ -96,6 +138,8 @@ namespace Kuchen
 			}
 			foreach(var se in subscribeEvents)
 			{
+				if(se.Pausing) continue;
+				
 				bool match = false;
 				foreach(var t in se.Topics)
 				{

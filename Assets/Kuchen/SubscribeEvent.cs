@@ -5,6 +5,7 @@ namespace Kuchen
 {
 	public interface ISubscribeEvent
 	{
+		bool Pausing { get; set; }
 		string[] Topics { get; }
 		void Call(string topic, object[] args);
 		string ToString();
@@ -41,6 +42,7 @@ namespace Kuchen
 	public partial class SubscribeEvent : ISubscribeEvent
 	{
 		public string[] Topics { get; private set; }
+		public bool Pausing { get; set; }
 		private Action<string> callback;
 		
 		public SubscribeEvent(string[] topics, Action callback)
@@ -80,6 +82,7 @@ namespace Kuchen
 	public class SubscribeEvent<T1> : ISubscribeEvent
 	{
 		public string[] Topics { get; private set; }
+		public bool Pausing { get; set; }
 		private Action<string, T1> callback;
 		
 		public SubscribeEvent(string[] topics, Action<string, T1> callback)
@@ -113,6 +116,7 @@ namespace Kuchen
 	public class SubscribeEvent<T1, T2> : ISubscribeEvent
 	{
 		public string[] Topics { get; private set; }
+		public bool Pausing { get; set; }
 		private Action<string, T1, T2> callback;
 		
 		public SubscribeEvent(string[] topics, Action<string, T1, T2> callback)

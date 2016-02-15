@@ -198,5 +198,40 @@ namespace Kuchen.Test
 			subscriber.Call("topic2");
 			Assert.AreEqual(callNum1, 3);
 		}
+		
+		[Test]
+		public void Pause()
+		{
+			var subscriber = new Subscriber();
+			
+			int callNum1 = 0;
+			subscriber.Subscribe("topic1", () => { callNum1++; });
+			
+			subscriber.Call("topic1");
+			Assert.AreEqual(callNum1, 1);
+			
+			subscriber.Pause("topic1");
+			
+			subscriber.Call("topic1");
+			Assert.AreEqual(callNum1, 1);
+		}
+		
+		[Test]
+		public void Resume()
+		{
+			var subscriber = new Subscriber();
+			
+			int callNum1 = 0;
+			subscriber.Subscribe("topic1", () => { callNum1++; });
+			subscriber.Pause("topic1");
+			
+			subscriber.Call("topic1");
+			Assert.AreEqual(callNum1, 0);
+			
+			subscriber.Resume("topic1");
+			
+			subscriber.Call("topic1");
+			Assert.AreEqual(callNum1, 1);
+		}
 	}
 }
