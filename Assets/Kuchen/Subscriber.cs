@@ -107,7 +107,10 @@ namespace Kuchen
 			
 			for(var i=subscribeEvents.Count-1;i>=0;--i)
 			{
-				if(Array.IndexOf(subscribeEvents[i].Topics, topic) >= 0) subscribeEvents[i].Muting = mute;
+				foreach(var t in subscribeEvents[i].Topics)
+				{
+					if(Util.PatternMatch.IsMatch(t, topic)) subscribeEvents[i].Muting = mute;
+				}
 			}
 		}
 		public void Unmute(string topic){ Mute(topic, false); }
