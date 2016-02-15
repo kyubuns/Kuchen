@@ -82,47 +82,47 @@ namespace Kuchen
 			for(var i=subscribeEvents.Count-1;i>=0;--i) if(se == subscribeEvents[i]) subscribeEvents.RemoveAt(i);
 		}
 		
-		public void Pause(bool active = false)
+		public void Mute(bool mute = true)
 		{
 			if(bookedEvents != null)
 			{
-				bookedEvents.Add(() => Pause(active));
+				bookedEvents.Add(() => Mute(mute));
 				return;
 			}
 			
 			for(var i=subscribeEvents.Count-1;i>=0;--i)
 			{
-				subscribeEvents[i].Pausing = !active;
+				subscribeEvents[i].Muting = mute;
 			}
 		}
-		public void Resume(){ Pause(true); }
+		public void Unmute(){ Mute(false); }
 		
-		public void Pause(string topic, bool active = false)
+		public void Mute(string topic, bool mute = true)
 		{
 			if(bookedEvents != null)
 			{
-				bookedEvents.Add(() => Pause(topic, active));
+				bookedEvents.Add(() => Mute(topic, mute));
 				return;
 			}
 			
 			for(var i=subscribeEvents.Count-1;i>=0;--i)
 			{
-				if(Array.IndexOf(subscribeEvents[i].Topics, topic) >= 0) subscribeEvents[i].Pausing = !active;
+				if(Array.IndexOf(subscribeEvents[i].Topics, topic) >= 0) subscribeEvents[i].Muting = mute;
 			}
 		}
-		public void Resume(string topic){ Pause(topic, true); }
+		public void Unmute(string topic){ Mute(topic, false); }
 		
-		public void Pause(ISubscribeEvent se, bool active = false)
+		public void Mute(ISubscribeEvent se, bool mute = true)
 		{
 			if(bookedEvents != null)
 			{
-				bookedEvents.Add(() => Pause(se, active));
+				bookedEvents.Add(() => Mute(se, mute));
 				return;
 			}
 			
-			for(var i=subscribeEvents.Count-1;i>=0;--i) if(se == subscribeEvents[i]) subscribeEvents[i].Pausing = !active;
+			for(var i=subscribeEvents.Count-1;i>=0;--i) if(se == subscribeEvents[i]) subscribeEvents[i].Muting = mute;
 		}
-		public void Resume(ISubscribeEvent se){ Pause(se, true); }
+		public void Unmute(ISubscribeEvent se){ Mute(se, false); }
 		
 		public int Call(string topic) { return Call(topic, new object[]{}); }
 		public int Call<T1>(string topic, T1 arg1) { return Call(topic, new object[]{arg1}); }
@@ -141,7 +141,7 @@ namespace Kuchen
 			}
 			foreach(var se in subscribeEvents)
 			{
-				if(se.Pausing) continue;
+				if(se.Muting) continue;
 				
 				bool match = false;
 				foreach(var t in se.Topics)
