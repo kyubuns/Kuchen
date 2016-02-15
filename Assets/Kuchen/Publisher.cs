@@ -1,15 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class Publisher : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+﻿namespace Kuchen
+{
+	public class Publisher
+	{
 	}
 }
