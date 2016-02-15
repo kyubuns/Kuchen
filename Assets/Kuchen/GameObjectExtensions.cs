@@ -78,6 +78,22 @@ namespace Kuchen
 			return se;
 		}
 		
+		public static ISubscribeEvent Subscribe<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Action<string, T1, T2, T3> callback)
+		{
+			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topic, callback);
+		}
+		
+		public static ISubscribeEvent SubscribeOnce<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Action<string, T1, T2, T3> callback)
+		{
+			var subscriber = GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber;
+			ISubscribeEvent se = null;
+			se = subscriber.Subscribe<T1, T2, T3>(topic, (t, a1, a2, a3) => {
+				subscriber.Unsubscribe(se);
+				callback(t, a1, a2, a3);
+			});
+			return se;
+		}
+		
 		public static void Unsubscribe(this MonoBehaviour behaviour)
 		{
 			GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Unsubscribe();
@@ -96,6 +112,7 @@ namespace Kuchen
 		public static void Publish(this MonoBehaviour behaviour, string topic) { Publisher.Publish(topic); }
 		public static void Publish<T1>(this MonoBehaviour behaviour, string topic, T1 arg1) { Publisher.Publish(topic, arg1); }
 		public static void Publish<T1, T2>(this MonoBehaviour behaviour, string topic, T1 arg1, T2 arg2) { Publisher.Publish(topic, arg1, arg2); }
+		public static void Publish<T1, T2, T3>(this MonoBehaviour behaviour, string topic, T1 arg1, T2 arg2, T3 arg3) { Publisher.Publish(topic, arg1, arg2, arg3); }
 		
 		public static Coroutine WaitForMessage(this MonoBehaviour behaviour, string topic, float timeout = 0.0f)
 		{

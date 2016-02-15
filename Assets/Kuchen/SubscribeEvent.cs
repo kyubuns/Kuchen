@@ -37,6 +37,12 @@ namespace Kuchen
 		{
 			return new SubscribeEvent<T1, T2>(topics, callback);
 		}
+		
+		public static SubscribeEvent<T1, T2, T3> Create<T1, T2, T3>(string topic, Action<string, T1, T2, T3> callback) { return Create(new string[]{topic}, callback); }
+		public static SubscribeEvent<T1, T2, T3> Create<T1, T2, T3>(string[] topics, Action<string, T1, T2, T3> callback)
+		{
+			return new SubscribeEvent<T1, T2, T3>(topics, callback);
+		}
 	}
 	
 	public partial class SubscribeEvent : ISubscribeEvent
@@ -144,6 +150,40 @@ namespace Kuchen
 		public override string ToString()
 		{
 			return String.Format("SubscribeEvent<{1},{2}> Topic: {0}", string.Join(",", Topics), typeof(T1), typeof(T2));
+		}
+	}
+	
+	public class SubscribeEvent<T1, T2, T3> : ISubscribeEvent
+	{
+		public string[] Topics { get; private set; }
+		public bool Pausing { get; set; }
+		private Action<string, T1, T2, T3> callback;
+		
+		public SubscribeEvent(string[] topics, Action<string, T1, T2, T3> callback)
+		{
+			this.Topics = topics;
+			this.callback = callback;
+		}
+		
+		public bool RemoveTopic(string topic)
+		{
+			var i = Array.IndexOf(Topics, topic);
+			if(i == -1) return false;
+			
+			var tmp = new List<string>(Topics);
+			tmp.RemoveAt(i);
+			Topics = tmp.ToArray();
+			return Topics.Length == 0;
+		}
+		
+		public void Call(string topic, object[] args)
+		{
+			this.callback(topic, (T1)args[0], (T2)args[1], (T3)args[2]);
+		}
+		
+		public override string ToString()
+		{
+			return String.Format("SubscribeEvent<{1},{2},{3}> Topic: {0}", string.Join(",", Topics), typeof(T1), typeof(T2), typeof(T3));
 		}
 	}
 }

@@ -18,6 +18,8 @@ namespace Kuchen
 		public ISubscribeEvent Subscribe<T1>(string[] topics, Action<string, T1> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
 		public ISubscribeEvent Subscribe<T1, T2>(string topic, Action<string, T1, T2> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
 		public ISubscribeEvent Subscribe<T1, T2>(string[] topics, Action<string, T1, T2> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
+		public ISubscribeEvent Subscribe<T1, T2, T3>(string topic, Action<string, T1, T2, T3> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
+		public ISubscribeEvent Subscribe<T1, T2, T3>(string[] topics, Action<string, T1, T2, T3> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
 		
 		private ISubscribeEvent Subscribe(ISubscribeEvent se)
 		{
@@ -125,6 +127,7 @@ namespace Kuchen
 		public int Call(string topic) { return Call(topic, new object[]{}); }
 		public int Call<T1>(string topic, T1 arg1) { return Call(topic, new object[]{arg1}); }
 		public int Call<T1, T2>(string topic, T1 arg1, T2 arg2) { return Call(topic, new object[]{arg1, arg2}); }
+		public int Call<T1, T2, T3>(string topic, T1 arg1, T2 arg2, T3 arg3) { return Call(topic, new object[]{arg1, arg2, arg3}); }
 		
 		public int Call(string topic, object[] args)
 		{
