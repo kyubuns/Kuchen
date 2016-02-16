@@ -110,7 +110,8 @@ namespace Kuchen
 		
 		public void Call(string topic, object[] args)
 		{
-			this.callback(topic, (T1)args[0]);
+			if(args.Length >= 1) this.callback(topic, (T1)args[0]);
+			else this.callback(topic, default(T1));
 		}
 		
 		public override string ToString()
@@ -144,7 +145,9 @@ namespace Kuchen
 		
 		public void Call(string topic, object[] args)
 		{
-			this.callback(topic, (T1)args[0], (T2)args[1]);
+			if(args.Length >= 2) this.callback(topic, (T1)args[0], (T2)args[1]);
+			if(args.Length >= 1) this.callback(topic, (T1)args[0], default(T2));
+			else this.callback(topic, default(T1), default(T2));
 		}
 		
 		public override string ToString()
@@ -178,7 +181,10 @@ namespace Kuchen
 		
 		public void Call(string topic, object[] args)
 		{
-			this.callback(topic, (T1)args[0], (T2)args[1], (T3)args[2]);
+			if(args.Length >= 3) this.callback(topic, (T1)args[0], (T2)args[1], (T3)args[2]);
+			if(args.Length >= 2) this.callback(topic, (T1)args[0], (T2)args[1], default(T3));
+			if(args.Length >= 1) this.callback(topic, (T1)args[0], default(T2), default(T3));
+			else this.callback(topic, default(T1), default(T2), default(T3));
 		}
 		
 		public override string ToString()
