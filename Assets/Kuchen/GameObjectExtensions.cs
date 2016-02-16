@@ -32,6 +32,31 @@ namespace Kuchen
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topic, callback);
 		}
 		
+		public static ISubscribeEvent Subscribe(this MonoBehaviour behaviour, string[] topics, Action callback)
+		{
+			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topics, callback);
+		}
+		
+		public static ISubscribeEvent Subscribe(this MonoBehaviour behaviour, string[] topics, Action<string> callback)
+		{
+			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topics, callback);
+		}
+		
+		public static ISubscribeEvent Subscribe<T1>(this MonoBehaviour behaviour, string[] topics, Action<string, T1> callback)
+		{
+			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topics, callback);
+		}
+		
+		public static ISubscribeEvent Subscribe<T1, T2>(this MonoBehaviour behaviour, string[] topics, Action<string, T1, T2> callback)
+		{
+			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topics, callback);
+		}
+		
+		public static ISubscribeEvent Subscribe<T1, T2, T3>(this MonoBehaviour behaviour, string[] topics, Action<string, T1, T2, T3> callback)
+		{
+			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topics, callback);
+		}
+		
 		public static ISubscribeEvent SubscribeOnce(this MonoBehaviour behaviour, string topic, Action callback)
 		{
 			var subscriber = GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber;
