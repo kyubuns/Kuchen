@@ -45,7 +45,7 @@ public class WithArgs : MonoBehaviour
             Debug.LogFormat("{0}: {1}", message, number);
         });
 
-        this.Publish("SampleTopic", "test message", 123);
+        this.Publish("SampleTopic", "test message", 611);
     }
 }
 ```
@@ -189,4 +189,5 @@ public class NonGameObject
 
 ## Special Thanks
 
-* MiniRegex - @kimika127
+* Y.O.
+* MiniRegex(@kimika127)
