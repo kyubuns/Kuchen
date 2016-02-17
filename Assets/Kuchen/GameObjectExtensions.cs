@@ -167,6 +167,16 @@ namespace Kuchen
 		public static void Publish<T1, T2>(this MonoBehaviour behaviour, string topic, T1 arg1, T2 arg2) { Publisher.Publish(topic, arg1, arg2); }
 		public static void Publish<T1, T2, T3>(this MonoBehaviour behaviour, string topic, T1 arg1, T2 arg2, T3 arg3) { Publisher.Publish(topic, arg1, arg2, arg3); }
 		
+		public static void Mute(this MonoBehaviour behaviour, string topic)
+		{
+			GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Mute(topic);
+		}
+		
+		public static void Unmute(this MonoBehaviour behaviour, string topic)
+		{
+			GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Unmute(topic);
+		}
+		
 		public static Coroutine WaitForMessage(this MonoBehaviour behaviour, string topic, float timeout = 0.0f)
 		{
 			return behaviour.WaitForMessage(new string[]{topic}, timeout);
