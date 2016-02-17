@@ -14,10 +14,16 @@ namespace Kuchen
 		public ISubscribeEvent Subscribe(string[] topics, Action callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
 		public ISubscribeEvent Subscribe(string topic, Action<string> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
 		public ISubscribeEvent Subscribe(string[] topics, Action<string> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
+		public ISubscribeEvent Subscribe<T1>(string topic, Action<T1> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
+		public ISubscribeEvent Subscribe<T1>(string[] topics, Action<T1> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
 		public ISubscribeEvent Subscribe<T1>(string topic, Action<string, T1> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
 		public ISubscribeEvent Subscribe<T1>(string[] topics, Action<string, T1> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
+		public ISubscribeEvent Subscribe<T1, T2>(string topic, Action<T1, T2> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
+		public ISubscribeEvent Subscribe<T1, T2>(string[] topics, Action<T1, T2> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
 		public ISubscribeEvent Subscribe<T1, T2>(string topic, Action<string, T1, T2> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
 		public ISubscribeEvent Subscribe<T1, T2>(string[] topics, Action<string, T1, T2> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
+		public ISubscribeEvent Subscribe<T1, T2, T3>(string topic, Action<T1, T2, T3> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
+		public ISubscribeEvent Subscribe<T1, T2, T3>(string[] topics, Action<T1, T2, T3> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
 		public ISubscribeEvent Subscribe<T1, T2, T3>(string topic, Action<string, T1, T2, T3> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
 		public ISubscribeEvent Subscribe<T1, T2, T3>(string[] topics, Action<string, T1, T2, T3> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
 		

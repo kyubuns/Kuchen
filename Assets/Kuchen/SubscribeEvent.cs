@@ -26,16 +26,34 @@ namespace Kuchen
 			return new SubscribeEvent(topics, callback);
 		}
 		
+		public static SubscribeEvent<T1> Create<T1>(string topic, Action<T1> callback) { return Create(new string[]{topic}, callback); }
+		public static SubscribeEvent<T1> Create<T1>(string[] topics, Action<T1> callback)
+		{
+			return new SubscribeEvent<T1>(topics, callback);
+		}
+		
 		public static SubscribeEvent<T1> Create<T1>(string topic, Action<string, T1> callback) { return Create(new string[]{topic}, callback); }
 		public static SubscribeEvent<T1> Create<T1>(string[] topics, Action<string, T1> callback)
 		{
 			return new SubscribeEvent<T1>(topics, callback);
 		}
 		
+		public static SubscribeEvent<T1, T2> Create<T1, T2>(string topic, Action<T1, T2> callback) { return Create(new string[]{topic}, callback); }
+		public static SubscribeEvent<T1, T2> Create<T1, T2>(string[] topics, Action<T1, T2> callback)
+		{
+			return new SubscribeEvent<T1, T2>(topics, callback);
+		}
+		
 		public static SubscribeEvent<T1, T2> Create<T1, T2>(string topic, Action<string, T1, T2> callback) { return Create(new string[]{topic}, callback); }
 		public static SubscribeEvent<T1, T2> Create<T1, T2>(string[] topics, Action<string, T1, T2> callback)
 		{
 			return new SubscribeEvent<T1, T2>(topics, callback);
+		}
+		
+		public static SubscribeEvent<T1, T2, T3> Create<T1, T2, T3>(string topic, Action<T1, T2, T3> callback) { return Create(new string[]{topic}, callback); }
+		public static SubscribeEvent<T1, T2, T3> Create<T1, T2, T3>(string[] topics, Action<T1, T2, T3> callback)
+		{
+			return new SubscribeEvent<T1, T2, T3>(topics, callback);
 		}
 		
 		public static SubscribeEvent<T1, T2, T3> Create<T1, T2, T3>(string topic, Action<string, T1, T2, T3> callback) { return Create(new string[]{topic}, callback); }
@@ -91,6 +109,12 @@ namespace Kuchen
 		public bool Muting { get; set; }
 		private Action<string, T1> callback;
 		
+		public SubscribeEvent(string[] topics, Action<T1> callback)
+		{
+			this.Topics = topics;
+			this.callback = (_, arg1) => { callback(arg1); };
+		}
+		
 		public SubscribeEvent(string[] topics, Action<string, T1> callback)
 		{
 			this.Topics = topics;
@@ -125,6 +149,12 @@ namespace Kuchen
 		public string[] Topics { get; private set; }
 		public bool Muting { get; set; }
 		private Action<string, T1, T2> callback;
+		
+		public SubscribeEvent(string[] topics, Action<T1, T2> callback)
+		{
+			this.Topics = topics;
+			this.callback = (_, arg1, arg2) => { callback(arg1, arg2); };
+		}
 		
 		public SubscribeEvent(string[] topics, Action<string, T1, T2> callback)
 		{
@@ -161,6 +191,12 @@ namespace Kuchen
 		public string[] Topics { get; private set; }
 		public bool Muting { get; set; }
 		private Action<string, T1, T2, T3> callback;
+		
+		public SubscribeEvent(string[] topics, Action<T1, T2, T3> callback)
+		{
+			this.Topics = topics;
+			this.callback = (_, arg1, arg2, arg3) => { callback(arg1, arg2, arg3); };
+		}
 		
 		public SubscribeEvent(string[] topics, Action<string, T1, T2, T3> callback)
 		{
