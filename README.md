@@ -41,7 +41,7 @@ public class WithArgs : MonoBehaviour
 {
     void Start()
     {
-        this.Subscribe<string, int>("SampleTopic", (topic, message, number) => {
+        this.Subscribe<string, int>("SampleTopic", (message, number) => {
             Debug.LogFormat("{0}: {1}", message, number);
         });
 
