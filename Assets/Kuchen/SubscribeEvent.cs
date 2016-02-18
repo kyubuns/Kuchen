@@ -20,22 +20,10 @@ namespace Kuchen
 			return new SubscribeEvent(topics, callback);
 		}
 		
-		public static SubscribeEventWithTopic Create(string topic, Action<string> callback) { return Create(new string[]{topic}, callback); }
-		public static SubscribeEventWithTopic Create(string[] topics, Action<string> callback)
-		{
-			return new SubscribeEventWithTopic(topics, callback);
-		}
-		
 		public static SubscribeEvent<T1> Create<T1>(string topic, Action<T1> callback) { return Create(new string[]{topic}, callback); }
 		public static SubscribeEvent<T1> Create<T1>(string[] topics, Action<T1> callback)
 		{
 			return new SubscribeEvent<T1>(topics, callback);
-		}
-		
-		public static SubscribeEventWithTopic<T1> Create<T1>(string topic, Action<string, T1> callback) { return Create(new string[]{topic}, callback); }
-		public static SubscribeEventWithTopic<T1> Create<T1>(string[] topics, Action<string, T1> callback)
-		{
-			return new SubscribeEventWithTopic<T1>(topics, callback);
 		}
 		
 		public static SubscribeEvent<T1, T2> Create<T1, T2>(string topic, Action<T1, T2> callback) { return Create(new string[]{topic}, callback); }
@@ -44,16 +32,31 @@ namespace Kuchen
 			return new SubscribeEvent<T1, T2>(topics, callback);
 		}
 		
-		public static SubscribeEventWithTopic<T1, T2> Create<T1, T2>(string topic, Action<string, T1, T2> callback) { return Create(new string[]{topic}, callback); }
-		public static SubscribeEventWithTopic<T1, T2> Create<T1, T2>(string[] topics, Action<string, T1, T2> callback)
-		{
-			return new SubscribeEventWithTopic<T1, T2>(topics, callback);
-		}
-		
 		public static SubscribeEvent<T1, T2, T3> Create<T1, T2, T3>(string topic, Action<T1, T2, T3> callback) { return Create(new string[]{topic}, callback); }
 		public static SubscribeEvent<T1, T2, T3> Create<T1, T2, T3>(string[] topics, Action<T1, T2, T3> callback)
 		{
 			return new SubscribeEvent<T1, T2, T3>(topics, callback);
+		}
+	}
+	
+	public partial class SubscribeEventWithTopic
+	{
+		public static SubscribeEventWithTopic Create(string topic, Action<string> callback) { return Create(new string[]{topic}, callback); }
+		public static SubscribeEventWithTopic Create(string[] topics, Action<string> callback)
+		{
+			return new SubscribeEventWithTopic(topics, callback);
+		}
+		
+		public static SubscribeEventWithTopic<T1> Create<T1>(string topic, Action<string, T1> callback) { return Create(new string[]{topic}, callback); }
+		public static SubscribeEventWithTopic<T1> Create<T1>(string[] topics, Action<string, T1> callback)
+		{
+			return new SubscribeEventWithTopic<T1>(topics, callback);
+		}
+		
+		public static SubscribeEventWithTopic<T1, T2> Create<T1, T2>(string topic, Action<string, T1, T2> callback) { return Create(new string[]{topic}, callback); }
+		public static SubscribeEventWithTopic<T1, T2> Create<T1, T2>(string[] topics, Action<string, T1, T2> callback)
+		{
+			return new SubscribeEventWithTopic<T1, T2>(topics, callback);
 		}
 		
 		public static SubscribeEventWithTopic<T1, T2, T3> Create<T1, T2, T3>(string topic, Action<string, T1, T2, T3> callback) { return Create(new string[]{topic}, callback); }

@@ -12,7 +12,7 @@ namespace Kuchen
 		{
 			subscriber = new Subscriber();
 			Topics = new List<string>();
-			subscriber.Subscribe("*", Record);
+			subscriber.SubscribeWithTopic("*", Record);
 		}
 		
 		private void Record(string topic)

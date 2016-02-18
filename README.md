@@ -41,7 +41,7 @@ public class WithArgs : MonoBehaviour
 {
     void Start()
     {
-        this.Subscribe<string, int>("SampleTopic", (message, number) => {
+        this.Subscribe("SampleTopic", (string message, int number) => {
             Debug.LogFormat("{0}: {1}", message, number);
         });
 
@@ -78,7 +78,7 @@ public class Wildcard : MonoBehaviour
 {
     void Start()
     {
-        this.Subscribe("Topic.*", (topic) => { Debug.Log(topic); });
+        this.SubscribeWithTopic("Topic.*", (topic) => { Debug.Log(topic); });
 
         this.Publish("Topic.Hoge");
         this.Publish("Topic.Fuga");
@@ -96,7 +96,7 @@ public class Multiple : MonoBehaviour
 {
     void Start()
     {
-        this.Subscribe(new string[]{"Topic.Hoge", "Topic.Fuga"}, (topic) => { Debug.Log(topic); });
+        this.SubscribeWithTopic(new string[]{"Topic.Hoge", "Topic.Fuga"}, (topic) => { Debug.Log(topic); });
 
         this.Publish("Topic.Hoge");
         this.Publish("Topic.Fuga");
@@ -114,7 +114,7 @@ public class SubscribeOnce : MonoBehaviour
 {
     void Start()
     {
-        this.SubscribeOnce("SampleTopic", (topic) => { Debug.Log(topic); });
+        this.SubscribeOnce("SampleTopic", () => { Debug.Log("!"); });
 
         this.Publish("SampleTopic");
         this.Publish("SampleTopic"); // 2回目は呼び出されない
@@ -122,18 +122,18 @@ public class SubscribeOnce : MonoBehaviour
 }
 ```
 
-### SubscribeWithCoroutine
+### SubscribeAndStartCoroutine
 
 ```C#
 using System.Collections;
 using UnityEngine;
 using Kuchen;
 
-public class SubscribeWithCoroutine : MonoBehaviour
+public class SubscribeAndStartCoroutine : MonoBehaviour
 {
     void Start()
     {
-        this.SubscribeWithCoroutine("SampleTopic", Coroutine);
+        this.SubscribeAndStartCoroutine("SampleTopic", Coroutine);
         this.Publish("SampleTopic");
     }
 
