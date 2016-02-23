@@ -8,7 +8,7 @@ namespace Kuchen.Util
 {
 	public static class Coroutine
 	{
-		public static IEnumerator WaitForMessage(Subscriber subscriber, string[] topics, float timeout = 0.0f)
+		public static IEnumerator WaitForMessage(this Subscriber subscriber, string[] topics, float timeout = 0.0f)
 		{
 			var called = false;
 			var startTime = Time.time;
