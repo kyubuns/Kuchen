@@ -12,10 +12,10 @@ namespace Kuchen.Test
 			var subscribeEvent2 = subscriber.SubscribeWithTopic("topic2", (t) => {});
 			var subscribeEvent3 = subscriber.SubscribeWithTopic<int>("topic3", (t, a1) => {});
 			var subscribeEvent4 = subscriber.SubscribeWithTopic<int, int>("topic4", (t, a1, a2) => {});
-			Assert.AreEqual(subscribeEvent1.Topics[0], "topic1");
-			Assert.AreEqual(subscribeEvent2.Topics[0], "topic2");
-			Assert.AreEqual(subscribeEvent3.Topics[0], "topic3");
-			Assert.AreEqual(subscribeEvent4.Topics[0], "topic4");
+			Assert.AreEqual(subscribeEvent1.Event.Topics[0], "topic1");
+			Assert.AreEqual(subscribeEvent2.Event.Topics[0], "topic2");
+			Assert.AreEqual(subscribeEvent3.Event.Topics[0], "topic3");
+			Assert.AreEqual(subscribeEvent4.Event.Topics[0], "topic4");
 		}
 		
 		[Test]

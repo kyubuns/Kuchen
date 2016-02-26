@@ -7,90 +7,90 @@ namespace Kuchen
 {
 	public static class GameObjectExtension
 	{
-		public static ISubscribeEvent Subscribe(this MonoBehaviour behaviour, string topic, Action callback)
+		public static SubscribeEventChain Subscribe(this MonoBehaviour behaviour, string topic, Action callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topic, callback);
 		}
 		
-		public static ISubscribeEvent SubscribeWithTopic(this MonoBehaviour behaviour, string topic, Action<string> callback)
+		public static SubscribeEventChain SubscribeWithTopic(this MonoBehaviour behaviour, string topic, Action<string> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.SubscribeWithTopic(topic, callback);
 		}
 		
-		public static ISubscribeEvent Subscribe<T1>(this MonoBehaviour behaviour, string topic, Action<T1> callback)
+		public static SubscribeEventChain Subscribe<T1>(this MonoBehaviour behaviour, string topic, Action<T1> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topic, callback);
 		}
 		
-		public static ISubscribeEvent SubscribeWithTopic<T1>(this MonoBehaviour behaviour, string topic, Action<string, T1> callback)
+		public static SubscribeEventChain SubscribeWithTopic<T1>(this MonoBehaviour behaviour, string topic, Action<string, T1> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.SubscribeWithTopic(topic, callback);
 		}
 		
-		public static ISubscribeEvent Subscribe<T1, T2>(this MonoBehaviour behaviour, string topic, Action<T1, T2> callback)
+		public static SubscribeEventChain Subscribe<T1, T2>(this MonoBehaviour behaviour, string topic, Action<T1, T2> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topic, callback);
 		}
 		
-		public static ISubscribeEvent SubscribeWithTopic<T1, T2>(this MonoBehaviour behaviour, string topic, Action<string, T1, T2> callback)
+		public static SubscribeEventChain SubscribeWithTopic<T1, T2>(this MonoBehaviour behaviour, string topic, Action<string, T1, T2> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.SubscribeWithTopic(topic, callback);
 		}
 		
-		public static ISubscribeEvent Subscribe<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Action<T1, T2, T3> callback)
+		public static SubscribeEventChain Subscribe<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Action<T1, T2, T3> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topic, callback);
 		}
 		
-		public static ISubscribeEvent SubscribeWithTopic<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Action<string, T1, T2, T3> callback)
+		public static SubscribeEventChain SubscribeWithTopic<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Action<string, T1, T2, T3> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.SubscribeWithTopic(topic, callback);
 		}
 		
-		public static ISubscribeEvent Subscribe(this MonoBehaviour behaviour, string[] topics, Action callback)
+		public static SubscribeEventChain Subscribe(this MonoBehaviour behaviour, string[] topics, Action callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topics, callback);
 		}
 		
-		public static ISubscribeEvent SubscribeWithTopic(this MonoBehaviour behaviour, string[] topics, Action<string> callback)
+		public static SubscribeEventChain SubscribeWithTopic(this MonoBehaviour behaviour, string[] topics, Action<string> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.SubscribeWithTopic(topics, callback);
 		}
 		
-		public static ISubscribeEvent Subscribe<T1>(this MonoBehaviour behaviour, string[] topics, Action<T1> callback)
+		public static SubscribeEventChain Subscribe<T1>(this MonoBehaviour behaviour, string[] topics, Action<T1> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topics, callback);
 		}
 		
-		public static ISubscribeEvent SubscribeWithTopic<T1>(this MonoBehaviour behaviour, string[] topics, Action<string, T1> callback)
+		public static SubscribeEventChain SubscribeWithTopic<T1>(this MonoBehaviour behaviour, string[] topics, Action<string, T1> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.SubscribeWithTopic(topics, callback);
 		}
 		
-		public static ISubscribeEvent Subscribe<T1, T2>(this MonoBehaviour behaviour, string[] topics, Action<T1, T2> callback)
+		public static SubscribeEventChain Subscribe<T1, T2>(this MonoBehaviour behaviour, string[] topics, Action<T1, T2> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topics, callback);
 		}
 		
-		public static ISubscribeEvent SubscribeWithTopic<T1, T2>(this MonoBehaviour behaviour, string[] topics, Action<string, T1, T2> callback)
+		public static SubscribeEventChain SubscribeWithTopic<T1, T2>(this MonoBehaviour behaviour, string[] topics, Action<string, T1, T2> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.SubscribeWithTopic(topics, callback);
 		}
 		
-		public static ISubscribeEvent Subscribe<T1, T2, T3>(this MonoBehaviour behaviour, string[] topics, Action<T1, T2, T3> callback)
+		public static SubscribeEventChain Subscribe<T1, T2, T3>(this MonoBehaviour behaviour, string[] topics, Action<T1, T2, T3> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topics, callback);
 		}
 		
-		public static ISubscribeEvent SubscribeWithTopic<T1, T2, T3>(this MonoBehaviour behaviour, string[] topics, Action<string, T1, T2, T3> callback)
+		public static SubscribeEventChain SubscribeWithTopic<T1, T2, T3>(this MonoBehaviour behaviour, string[] topics, Action<string, T1, T2, T3> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.SubscribeWithTopic(topics, callback);
 		}
 		
-		public static ISubscribeEvent SubscribeOnce(this MonoBehaviour behaviour, string topic, Action callback)
+		public static SubscribeEventChain SubscribeOnce(this MonoBehaviour behaviour, string topic, Action callback)
 		{
 			var subscriber = GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber;
-			ISubscribeEvent se = null;
+			SubscribeEventChain se = null;
 			se = subscriber.Subscribe(topic, () => {
 				subscriber.Unsubscribe(se);
 				callback();
@@ -98,10 +98,10 @@ namespace Kuchen
 			return se;
 		}
 		
-		public static ISubscribeEvent SubscribeOnceWithTopic(this MonoBehaviour behaviour, string topic, Action<string> callback)
+		public static SubscribeEventChain SubscribeOnceWithTopic(this MonoBehaviour behaviour, string topic, Action<string> callback)
 		{
 			var subscriber = GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber;
-			ISubscribeEvent se = null;
+			SubscribeEventChain se = null;
 			se = subscriber.SubscribeWithTopic(topic, (t) => {
 				subscriber.Unsubscribe(se);
 				callback(t);
@@ -109,10 +109,10 @@ namespace Kuchen
 			return se;
 		}
 		
-		public static ISubscribeEvent SubscribeOnce<T1>(this MonoBehaviour behaviour, string topic, Action<T1> callback)
+		public static SubscribeEventChain SubscribeOnce<T1>(this MonoBehaviour behaviour, string topic, Action<T1> callback)
 		{
 			var subscriber = GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber;
-			ISubscribeEvent se = null;
+			SubscribeEventChain se = null;
 			se = subscriber.Subscribe<T1>(topic, (a1) => {
 				subscriber.Unsubscribe(se);
 				callback(a1);
@@ -120,10 +120,10 @@ namespace Kuchen
 			return se;
 		}
 		
-		public static ISubscribeEvent SubscribeOnceWithTopic<T1>(this MonoBehaviour behaviour, string topic, Action<string, T1> callback)
+		public static SubscribeEventChain SubscribeOnceWithTopic<T1>(this MonoBehaviour behaviour, string topic, Action<string, T1> callback)
 		{
 			var subscriber = GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber;
-			ISubscribeEvent se = null;
+			SubscribeEventChain se = null;
 			se = subscriber.SubscribeWithTopic<T1>(topic, (t, a1) => {
 				subscriber.Unsubscribe(se);
 				callback(t, a1);
@@ -131,10 +131,10 @@ namespace Kuchen
 			return se;
 		}
 		
-		public static ISubscribeEvent SubscribeOnce<T1, T2>(this MonoBehaviour behaviour, string topic, Action<T1, T2> callback)
+		public static SubscribeEventChain SubscribeOnce<T1, T2>(this MonoBehaviour behaviour, string topic, Action<T1, T2> callback)
 		{
 			var subscriber = GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber;
-			ISubscribeEvent se = null;
+			SubscribeEventChain se = null;
 			se = subscriber.Subscribe<T1, T2>(topic, (a1, a2) => {
 				subscriber.Unsubscribe(se);
 				callback(a1, a2);
@@ -142,10 +142,10 @@ namespace Kuchen
 			return se;
 		}
 		
-		public static ISubscribeEvent SubscribeOnceWithTopic<T1, T2>(this MonoBehaviour behaviour, string topic, Action<string, T1, T2> callback)
+		public static SubscribeEventChain SubscribeOnceWithTopic<T1, T2>(this MonoBehaviour behaviour, string topic, Action<string, T1, T2> callback)
 		{
 			var subscriber = GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber;
-			ISubscribeEvent se = null;
+			SubscribeEventChain se = null;
 			se = subscriber.SubscribeWithTopic<T1, T2>(topic, (t, a1, a2) => {
 				subscriber.Unsubscribe(se);
 				callback(t, a1, a2);
@@ -153,10 +153,10 @@ namespace Kuchen
 			return se;
 		}
 		
-		public static ISubscribeEvent SubscribeOnce<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Action<T1, T2, T3> callback)
+		public static SubscribeEventChain SubscribeOnce<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Action<T1, T2, T3> callback)
 		{
 			var subscriber = GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber;
-			ISubscribeEvent se = null;
+			SubscribeEventChain se = null;
 			se = subscriber.Subscribe<T1, T2, T3>(topic, (a1, a2, a3) => {
 				subscriber.Unsubscribe(se);
 				callback(a1, a2, a3);
@@ -164,10 +164,10 @@ namespace Kuchen
 			return se;
 		}
 		
-		public static ISubscribeEvent SubscribeOnceWithTopic<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Action<string, T1, T2, T3> callback)
+		public static SubscribeEventChain SubscribeOnceWithTopic<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Action<string, T1, T2, T3> callback)
 		{
 			var subscriber = GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber;
-			ISubscribeEvent se = null;
+			SubscribeEventChain se = null;
 			se = subscriber.SubscribeWithTopic<T1, T2, T3>(topic, (t, a1, a2, a3) => {
 				subscriber.Unsubscribe(se);
 				callback(t, a1, a2, a3);
@@ -175,56 +175,56 @@ namespace Kuchen
 			return se;
 		}
 		
-		public static ISubscribeEvent SubscribeAndStartCoroutine(this MonoBehaviour behaviour, string topic, Func<IEnumerator> callback)
+		public static SubscribeEventChain SubscribeAndStartCoroutine(this MonoBehaviour behaviour, string topic, Func<IEnumerator> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe(topic, () => {
 				behaviour.StartCoroutine(callback());
 			});
 		}
 		
-		public static ISubscribeEvent SubscribeWithTopicAndStartCoroutine(this MonoBehaviour behaviour, string topic, Func<string, IEnumerator> callback)
+		public static SubscribeEventChain SubscribeWithTopicAndStartCoroutine(this MonoBehaviour behaviour, string topic, Func<string, IEnumerator> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.SubscribeWithTopic(topic, (t) => {
 				behaviour.StartCoroutine(callback(t));
 			});
 		}
 		
-		public static ISubscribeEvent SubscribeAndStartCoroutine<T1>(this MonoBehaviour behaviour, string topic, Func<T1, IEnumerator> callback)
+		public static SubscribeEventChain SubscribeAndStartCoroutine<T1>(this MonoBehaviour behaviour, string topic, Func<T1, IEnumerator> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe<T1>(topic, (a1) => {
 				behaviour.StartCoroutine(callback(a1));
 			});
 		}
 		
-		public static ISubscribeEvent SubscribeWithTopicAndStartCoroutine<T1>(this MonoBehaviour behaviour, string topic, Func<string, T1, IEnumerator> callback)
+		public static SubscribeEventChain SubscribeWithTopicAndStartCoroutine<T1>(this MonoBehaviour behaviour, string topic, Func<string, T1, IEnumerator> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.SubscribeWithTopic<T1>(topic, (t, a1) => {
 				behaviour.StartCoroutine(callback(t, a1));
 			});
 		}
 		
-		public static ISubscribeEvent SubscribeAndStartCoroutine<T1, T2>(this MonoBehaviour behaviour, string topic, Func<T1, T2, IEnumerator> callback)
+		public static SubscribeEventChain SubscribeAndStartCoroutine<T1, T2>(this MonoBehaviour behaviour, string topic, Func<T1, T2, IEnumerator> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe<T1, T2>(topic, (a1, a2) => {
 				behaviour.StartCoroutine(callback(a1, a2));
 			});
 		}
 		
-		public static ISubscribeEvent SubscribeWithTopicAndStartCoroutine<T1, T2>(this MonoBehaviour behaviour, string topic, Func<string, T1, T2, IEnumerator> callback)
+		public static SubscribeEventChain SubscribeWithTopicAndStartCoroutine<T1, T2>(this MonoBehaviour behaviour, string topic, Func<string, T1, T2, IEnumerator> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.SubscribeWithTopic<T1, T2>(topic, (t, a1, a2) => {
 				behaviour.StartCoroutine(callback(t, a1, a2));
 			});
 		}
 		
-		public static ISubscribeEvent SubscribeAndStartCoroutine<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Func<T1, T2, T3, IEnumerator> callback)
+		public static SubscribeEventChain SubscribeAndStartCoroutine<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Func<T1, T2, T3, IEnumerator> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Subscribe<T1, T2, T3>(topic, (a1, a2, a3) => {
 				behaviour.StartCoroutine(callback(a1, a2, a3));
 			});
 		}
 		
-		public static ISubscribeEvent SubscribeWithTopicAndStartCoroutine<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Func<string, T1, T2, T3, IEnumerator> callback)
+		public static SubscribeEventChain SubscribeWithTopicAndStartCoroutine<T1, T2, T3>(this MonoBehaviour behaviour, string topic, Func<string, T1, T2, T3, IEnumerator> callback)
 		{
 			return GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.SubscribeWithTopic<T1, T2, T3>(topic, (t, a1, a2, a3) => {
 				behaviour.StartCoroutine(callback(t, a1, a2, a3));

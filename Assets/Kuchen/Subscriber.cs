@@ -10,29 +10,29 @@ namespace Kuchen
 		private List<Action> bookedEvents = null;
 		private bool registered = false;
 		
-		public ISubscribeEvent Subscribe(string topic, Action callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
-		public ISubscribeEvent Subscribe(string[] topics, Action callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
-		public ISubscribeEvent SubscribeWithTopic(string topic, Action<string> callback) { return Subscribe(SubscribeEventWithTopic.Create(topic, callback)); }
-		public ISubscribeEvent SubscribeWithTopic(string[] topics, Action<string> callback) { return Subscribe(SubscribeEventWithTopic.Create(topics, callback)); }
-		public ISubscribeEvent Subscribe<T1>(string topic, Action<T1> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
-		public ISubscribeEvent Subscribe<T1>(string[] topics, Action<T1> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
-		public ISubscribeEvent SubscribeWithTopic<T1>(string topic, Action<string, T1> callback) { return Subscribe(SubscribeEventWithTopic.Create(topic, callback)); }
-		public ISubscribeEvent SubscribeWithTopic<T1>(string[] topics, Action<string, T1> callback) { return Subscribe(SubscribeEventWithTopic.Create(topics, callback)); }
-		public ISubscribeEvent Subscribe<T1, T2>(string topic, Action<T1, T2> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
-		public ISubscribeEvent Subscribe<T1, T2>(string[] topics, Action<T1, T2> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
-		public ISubscribeEvent SubscribeWithTopic<T1, T2>(string topic, Action<string, T1, T2> callback) { return Subscribe(SubscribeEventWithTopic.Create(topic, callback)); }
-		public ISubscribeEvent SubscribeWithTopic<T1, T2>(string[] topics, Action<string, T1, T2> callback) { return Subscribe(SubscribeEventWithTopic.Create(topics, callback)); }
-		public ISubscribeEvent Subscribe<T1, T2, T3>(string topic, Action<T1, T2, T3> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
-		public ISubscribeEvent Subscribe<T1, T2, T3>(string[] topics, Action<T1, T2, T3> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
-		public ISubscribeEvent SubscribeWithTopic<T1, T2, T3>(string topic, Action<string, T1, T2, T3> callback) { return Subscribe(SubscribeEventWithTopic.Create(topic, callback)); }
-		public ISubscribeEvent SubscribeWithTopic<T1, T2, T3>(string[] topics, Action<string, T1, T2, T3> callback) { return Subscribe(SubscribeEventWithTopic.Create(topics, callback)); }
+		public SubscribeEventChain Subscribe(string topic, Action callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
+		public SubscribeEventChain Subscribe(string[] topics, Action callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
+		public SubscribeEventChain SubscribeWithTopic(string topic, Action<string> callback) { return Subscribe(SubscribeEventWithTopic.Create(topic, callback)); }
+		public SubscribeEventChain SubscribeWithTopic(string[] topics, Action<string> callback) { return Subscribe(SubscribeEventWithTopic.Create(topics, callback)); }
+		public SubscribeEventChain Subscribe<T1>(string topic, Action<T1> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
+		public SubscribeEventChain Subscribe<T1>(string[] topics, Action<T1> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
+		public SubscribeEventChain SubscribeWithTopic<T1>(string topic, Action<string, T1> callback) { return Subscribe(SubscribeEventWithTopic.Create(topic, callback)); }
+		public SubscribeEventChain SubscribeWithTopic<T1>(string[] topics, Action<string, T1> callback) { return Subscribe(SubscribeEventWithTopic.Create(topics, callback)); }
+		public SubscribeEventChain Subscribe<T1, T2>(string topic, Action<T1, T2> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
+		public SubscribeEventChain Subscribe<T1, T2>(string[] topics, Action<T1, T2> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
+		public SubscribeEventChain SubscribeWithTopic<T1, T2>(string topic, Action<string, T1, T2> callback) { return Subscribe(SubscribeEventWithTopic.Create(topic, callback)); }
+		public SubscribeEventChain SubscribeWithTopic<T1, T2>(string[] topics, Action<string, T1, T2> callback) { return Subscribe(SubscribeEventWithTopic.Create(topics, callback)); }
+		public SubscribeEventChain Subscribe<T1, T2, T3>(string topic, Action<T1, T2, T3> callback) { return Subscribe(SubscribeEvent.Create(topic, callback)); }
+		public SubscribeEventChain Subscribe<T1, T2, T3>(string[] topics, Action<T1, T2, T3> callback) { return Subscribe(SubscribeEvent.Create(topics, callback)); }
+		public SubscribeEventChain SubscribeWithTopic<T1, T2, T3>(string topic, Action<string, T1, T2, T3> callback) { return Subscribe(SubscribeEventWithTopic.Create(topic, callback)); }
+		public SubscribeEventChain SubscribeWithTopic<T1, T2, T3>(string[] topics, Action<string, T1, T2, T3> callback) { return Subscribe(SubscribeEventWithTopic.Create(topics, callback)); }
 		
-		private ISubscribeEvent Subscribe(ISubscribeEvent se)
+		private SubscribeEventChain Subscribe(ISubscribeEvent se)
 		{
 			if(bookedEvents != null)
 			{
 				bookedEvents.Add(() => Subscribe(se));
-				return se;
+				return new SubscribeEventChain(this, se);
 			}
 			
 			if(!registered)
@@ -42,7 +42,7 @@ namespace Kuchen
 			}
 			
 			subscribeEvents.Add(se);
-			return se;
+			return new SubscribeEventChain(this, se);
 		}
 		
 		public void Dispose() { Unsubscribe(); }
@@ -75,6 +75,11 @@ namespace Kuchen
 			{
 				if(subscribeEvents[i].RemoveTopic(topic)) subscribeEvents.RemoveAt(i);
 			}
+		}
+		
+		public void Unsubscribe(SubscribeEventChain sec)
+		{
+			Unsubscribe(sec.Event);
 		}
 		
 		public void Unsubscribe(ISubscribeEvent se)
