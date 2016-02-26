@@ -114,7 +114,7 @@ public class SubscribeOnce : MonoBehaviour
 {
     void Start()
     {
-        this.SubscribeOnce("SampleTopic", () => { Debug.Log("!"); });
+        this.Subscribe("SampleTopic", () => { Debug.Log("!"); }).Once();
 
         this.Publish("SampleTopic");
         this.Publish("SampleTopic"); // 2回目は呼び出されない
