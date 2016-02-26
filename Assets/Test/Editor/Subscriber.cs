@@ -9,9 +9,9 @@ namespace Kuchen.Test
 		{
 			var subscriber = new Subscriber();
 			var subscribeEvent1 = subscriber.Subscribe("topic1", () => {});
-			var subscribeEvent2 = subscriber.Subscribe("topic2", (t) => {});
-			var subscribeEvent3 = subscriber.Subscribe<int>("topic3", (t, a1) => {});
-			var subscribeEvent4 = subscriber.Subscribe<int, int>("topic4", (t, a1, a2) => {});
+			var subscribeEvent2 = subscriber.SubscribeWithTopic("topic2", (t) => {});
+			var subscribeEvent3 = subscriber.SubscribeWithTopic<int>("topic3", (t, a1) => {});
+			var subscribeEvent4 = subscriber.SubscribeWithTopic<int, int>("topic4", (t, a1, a2) => {});
 			Assert.AreEqual(subscribeEvent1.Topics[0], "topic1");
 			Assert.AreEqual(subscribeEvent2.Topics[0], "topic2");
 			Assert.AreEqual(subscribeEvent3.Topics[0], "topic3");
@@ -49,13 +49,13 @@ namespace Kuchen.Test
 			subscriber.Subscribe("topic1", () => { noArgs = true; });
 
 			bool topicOnly = false;
-			subscriber.Subscribe("topic1", (topic) => { topicOnly = true; });
+			subscriber.SubscribeWithTopic("topic1", (topic) => { topicOnly = true; });
 
 			bool args1 = false;
-			subscriber.Subscribe<string>("topic1", (topic, arg) => { args1 = true; });
+			subscriber.SubscribeWithTopic<string>("topic1", (topic, arg) => { args1 = true; });
 
 			bool args2 = false;
-			subscriber.Subscribe<string, string>("topic1", (topic, arg1, arg2) => { args2 = true; });
+			subscriber.SubscribeWithTopic<string, string>("topic1", (topic, arg1, arg2) => { args2 = true; });
 			
 			var num = subscriber.Call("topic1", "ami", "mami");
 			
@@ -71,7 +71,7 @@ namespace Kuchen.Test
 		public void 引数の型を間違うとエラーになる()
 		{
 			var subscriber = new Subscriber();
-			subscriber.Subscribe<string>("topic1", (topic, arg) => {});
+			subscriber.SubscribeWithTopic<string>("topic1", (topic, arg) => {});
 			subscriber.Call("topic1", 123);
 		}
 		

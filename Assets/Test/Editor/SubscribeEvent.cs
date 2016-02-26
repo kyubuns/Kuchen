@@ -28,7 +28,7 @@ namespace Kuchen.Test
 			[Test]
 			public void Create()
 			{
-				var se = SubscribeEvent.Create("topic1", (t) => {});
+				var se = SubscribeEventWithTopic.Create("topic1", (t) => {});
 				Assert.AreEqual(se.Topics[0], "topic1");
 			}
 			
@@ -37,7 +37,7 @@ namespace Kuchen.Test
 			{
 				bool called = false;
 				string topic = null;
-				var se = SubscribeEvent.Create("topic1", (t) => {
+				var se = SubscribeEventWithTopic.Create("topic1", (t) => {
 					called = true;
 					topic = t;
 				});
@@ -52,7 +52,7 @@ namespace Kuchen.Test
 			[Test]
 			public void Create()
 			{
-				var se = SubscribeEvent.Create<int>("topic1", (t, a1) => {});
+				var se = SubscribeEvent.Create("topic1", (int a1) => {});
 				Assert.AreEqual(se.Topics[0], "topic1");
 			}
 			
@@ -62,7 +62,7 @@ namespace Kuchen.Test
 				bool called = false;
 				string topic = null;
 				int arg1 = 0;
-				var se = SubscribeEvent.Create<int>("topic1", (t, a1) => {
+				var se = SubscribeEventWithTopic.Create("topic1", (string t,int a1) => {
 					called = true;
 					topic = t;
 					arg1 = a1;
@@ -79,7 +79,7 @@ namespace Kuchen.Test
 			[Test]
 			public void Create()
 			{
-				var se = SubscribeEvent.Create<int, string>("topic1", (t, a1, a2) => {});
+				var se = SubscribeEventWithTopic.Create("topic1", (string t, int a1, string a2) => {});
 				Assert.AreEqual(se.Topics[0], "topic1");
 			}
 			
@@ -90,7 +90,7 @@ namespace Kuchen.Test
 				string topic = null;
 				int arg1 = 0;
 				string arg2 = null;
-				var se = SubscribeEvent.Create<int, string>("topic1", (t, a1, a2) => {
+				var se = SubscribeEventWithTopic.Create("topic1", (string t, int a1, string a2) => {
 					called = true;
 					topic = t;
 					arg1 = a1;
