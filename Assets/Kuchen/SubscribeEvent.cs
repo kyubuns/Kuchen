@@ -8,6 +8,7 @@ namespace Kuchen
 		bool Muting { get; set; }
 		string[] Topics { get; }
 		void Call(string topic, object[] args);
+		Action PostHook { get; set; }
 		string ToString();
 		bool RemoveTopic(string topic);
 	}
@@ -70,6 +71,7 @@ namespace Kuchen
 	{
 		public string[] Topics { get; private set; }
 		public bool Muting { get; set; }
+		public Action PostHook { get; set; }
 		private Action callback;
 		
 		public SubscribeEvent(string[] topics, Action callback)
@@ -92,6 +94,8 @@ namespace Kuchen
 		public void Call(string topic, object[] args)
 		{
 			this.callback();
+			
+			if(this.PostHook != null) this.PostHook();
 		}
 		
 		public override string ToString()
@@ -104,6 +108,7 @@ namespace Kuchen
 	{
 		public string[] Topics { get; private set; }
 		public bool Muting { get; set; }
+		public Action PostHook { get; set; }
 		private Action<string> callback;
 		
 		public SubscribeEventWithTopic(string[] topics, Action<string> callback)
@@ -126,6 +131,8 @@ namespace Kuchen
 		public void Call(string topic, object[] args)
 		{
 			this.callback(topic);
+			
+			if(this.PostHook != null) this.PostHook();
 		}
 		
 		public override string ToString()
@@ -138,6 +145,7 @@ namespace Kuchen
 	{
 		public string[] Topics { get; private set; }
 		public bool Muting { get; set; }
+		public Action PostHook { get; set; }
 		private Action<T1> callback;
 		
 		public SubscribeEvent(string[] topics, Action<T1> callback)
@@ -161,6 +169,8 @@ namespace Kuchen
 		{
 			if(args.Length >= 1) this.callback((T1)args[0]);
 			else this.callback(default(T1));
+			
+			if(this.PostHook != null) this.PostHook();
 		}
 		
 		public override string ToString()
@@ -173,6 +183,7 @@ namespace Kuchen
 	{
 		public string[] Topics { get; private set; }
 		public bool Muting { get; set; }
+		public Action PostHook { get; set; }
 		private Action<string, T1> callback;
 		
 		public SubscribeEventWithTopic(string[] topics, Action<string, T1> callback)
@@ -196,6 +207,8 @@ namespace Kuchen
 		{
 			if(args.Length >= 1) this.callback(topic, (T1)args[0]);
 			else this.callback(topic, default(T1));
+			
+			if(this.PostHook != null) this.PostHook();
 		}
 		
 		public override string ToString()
@@ -208,6 +221,7 @@ namespace Kuchen
 	{
 		public string[] Topics { get; private set; }
 		public bool Muting { get; set; }
+		public Action PostHook { get; set; }
 		private Action<T1, T2> callback;
 		
 		public SubscribeEvent(string[] topics, Action<T1, T2> callback)
@@ -232,6 +246,8 @@ namespace Kuchen
 			if(args.Length >= 2) this.callback((T1)args[0], (T2)args[1]);
 			else if(args.Length >= 1) this.callback((T1)args[0], default(T2));
 			else this.callback(default(T1), default(T2));
+			
+			if(this.PostHook != null) this.PostHook();
 		}
 		
 		public override string ToString()
@@ -244,6 +260,7 @@ namespace Kuchen
 	{
 		public string[] Topics { get; private set; }
 		public bool Muting { get; set; }
+		public Action PostHook { get; set; }
 		private Action<string, T1, T2> callback;
 		
 		public SubscribeEventWithTopic(string[] topics, Action<string, T1, T2> callback)
@@ -268,6 +285,8 @@ namespace Kuchen
 			if(args.Length >= 2) this.callback(topic, (T1)args[0], (T2)args[1]);
 			else if(args.Length >= 1) this.callback(topic, (T1)args[0], default(T2));
 			else this.callback(topic, default(T1), default(T2));
+			
+			if(this.PostHook != null) this.PostHook();
 		}
 		
 		public override string ToString()
@@ -280,6 +299,7 @@ namespace Kuchen
 	{
 		public string[] Topics { get; private set; }
 		public bool Muting { get; set; }
+		public Action PostHook { get; set; }
 		private Action<T1, T2, T3> callback;
 		
 		public SubscribeEvent(string[] topics, Action<T1, T2, T3> callback)
@@ -305,6 +325,8 @@ namespace Kuchen
 			else if(args.Length >= 2) this.callback((T1)args[0], (T2)args[1], default(T3));
 			else if(args.Length >= 1) this.callback((T1)args[0], default(T2), default(T3));
 			else this.callback(default(T1), default(T2), default(T3));
+			
+			if(this.PostHook != null) this.PostHook();
 		}
 		
 		public override string ToString()
@@ -317,6 +339,7 @@ namespace Kuchen
 	{
 		public string[] Topics { get; private set; }
 		public bool Muting { get; set; }
+		public Action PostHook { get; set; }
 		private Action<string, T1, T2, T3> callback;
 		
 		public SubscribeEventWithTopic(string[] topics, Action<string, T1, T2, T3> callback)
@@ -342,6 +365,8 @@ namespace Kuchen
 			else if(args.Length >= 2) this.callback(topic, (T1)args[0], (T2)args[1], default(T3));
 			else if(args.Length >= 1) this.callback(topic, (T1)args[0], default(T2), default(T3));
 			else this.callback(topic, default(T1), default(T2), default(T3));
+			
+			if(this.PostHook != null) this.PostHook();
 		}
 		
 		public override string ToString()

@@ -187,7 +187,7 @@ namespace Kuchen.Test
 			var mb = go.AddComponent<UnityEngine.MonoBehaviour>();
 			
 			int callNum1 = 0;
-			mb.SubscribeOnce("topic1", () => { callNum1++; });
+			mb.Subscribe("topic1", () => { callNum1++; }).Once();
 			Publisher.Publish("topic1");
 			Publisher.Publish("topic1");
 			Publisher.Publish("topic1");
