@@ -181,6 +181,20 @@ namespace Kuchen.Test
 		}
 		
 		[Test]
+		public void SubscribeOnce()
+		{
+			var go = new UnityEngine.GameObject();
+			var mb = go.AddComponent<UnityEngine.MonoBehaviour>();
+			
+			int callNum1 = 0;
+			mb.SubscribeOnce("topic1", () => { callNum1++; });
+			Publisher.Publish("topic1");
+			Publisher.Publish("topic1");
+			Publisher.Publish("topic1");
+			Assert.AreEqual(callNum1, 1);
+		}
+		
+		[Test]
 		public void 複数登録したうち1つだけ解除しても動く()
 		{
 			var subscriber = new Subscriber();
