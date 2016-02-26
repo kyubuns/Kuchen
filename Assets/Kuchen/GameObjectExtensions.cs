@@ -158,6 +158,11 @@ namespace Kuchen
 			GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Unsubscribe(se);
 		}
 		
+		public static void Unsubscribe(this MonoBehaviour behaviour, SubscribeEventChain sec)
+		{
+			GetOrAddComponent<KuchenSubscriberGameObject>(behaviour.gameObject).Subscriber.Unsubscribe(sec);
+		}
+		
 		public static void Publish(this MonoBehaviour behaviour, string topic) { Publisher.Publish(topic); }
 		public static void Publish<T1>(this MonoBehaviour behaviour, string topic, T1 arg1) { Publisher.Publish(topic, arg1); }
 		public static void Publish<T1, T2>(this MonoBehaviour behaviour, string topic, T1 arg1, T2 arg2) { Publisher.Publish(topic, arg1, arg2); }
