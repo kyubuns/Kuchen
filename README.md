@@ -1,3 +1,7 @@
+追記: UniRxのMessageBrokerを使いましょう。
+
+===
+
 # Kuchen
 
 Pub/Sub Library for Unity
